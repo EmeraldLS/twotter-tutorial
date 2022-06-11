@@ -3,25 +3,28 @@
         <div class="user-profile__twoot">
             <h3 class="twoot-item__user">
                 <span>
-                    @{{username}}
+                    @{{userName}}
                 </span>
-                <img :src="twoot.image" :alt="twoot.imageAlt" class="twoot-image" />
-                
+                <!-- <img :src="twoot.image" :alt="twoot.imageAlt" class="twoot-image" />
+                -->
             </h3>
             <div class="twoot-item__content">
                <p> <!--{{id}} - --> {{twoot.content}}</p> 
-                <p> <span>You have : {{likes}} likes</span> and <span>{{comment}} comments</span></p>
-                
+               <p>{{twootContent}}</p>
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
-export default{
+
+
+export default {
+    
     name: "TwootItem",
     props: {
-        username: {
+        userName: {
             type: String,
             required: true
         },
@@ -32,19 +35,14 @@ export default{
         id: {
             type: Number,
             required: true,
-        },
-        likes: {
-            type: Number,
-            required: true
-        },
-        comment: {
-            type: Number,
-            required: true
-        },
-        image: {
-            type: String,
-            required: false
         }
+    },
+    data() {
+        
+        return {
+            
+        }
+        
     },
     methods: {
         favoriteTwoot(id){
@@ -55,7 +53,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
     .twoot-item{
         background-color: white;
         padding: 20px;
@@ -63,7 +61,7 @@ export default{
         box-shadow: -10px 10px 10px #dfe3e8;
         box-sizing: border-box;
         cursor: pointer;
-        transition: all 0.25s ease;
+        transition: all 0.4s ease;
         margin: 10px;
     }
     .twoot-item:hover{

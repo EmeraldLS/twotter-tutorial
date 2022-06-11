@@ -1,16 +1,40 @@
 <template>
   <div id="app">
-    <UserProfile />
+    <nav>
+
+      <router-link to="/">
+        Twotter
+      </router-link>
+
+
+      <div class="nav-link">
+        <router-link :to="{ name: 'AboutView', params:  {about_me: about_user.id}}">About</router-link>
+        <h3 v-if="user">{{ user.userName }}</h3>
+      </div>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import UserProfile from "./components/userProfile.vue";
+
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+
 export default {
   name: "App",
-  components: {
-    UserProfile,
-  },
+  data() {
+    const store = useStore();
+    const user = computed(() => store.state.User.user)
+    
+    return {
+      user,
+      about_user: {
+        id: 1
+      }
+    }
+  }
+  
 };
 </script>
 
@@ -28,4 +52,13 @@ export default {
   min-height: 100vh;
   background: #f3f5fa;
 }
+
+nav{
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
 </style>
